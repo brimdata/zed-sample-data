@@ -15,6 +15,15 @@ else
   exit 1
 fi
 
+if [[ $(type -P "md5sum") ]]; then
+  SUMTOOL="md5sum"
+elif [[ $(type -P "md5") ]]; then
+  SUMTOOL="md5 -q"
+else
+  echo "md5sum/md5 not found in PATH"
+  exit 1
+fi
+
 ZNG_TYPE="$1"
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)/.."
 cd "$REPO_DIR"
@@ -27,7 +36,7 @@ do
   echo -n "${ZPATH}:" | tee -a "$TMPFILE"
   "$ZCAT" zeek-default/"$ZPATH".log.gz \
       | zq -f "$ZNG_TYPE" - \
-      | md5sum \
+      | $SUMTOOL \
       | awk '{ print $1 }' \
       | tee -a "$TMPFILE"
 done
