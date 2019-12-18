@@ -2,7 +2,16 @@
 set -e
 
 if [ $# -ne 1 ] || ! { [ "$1" = "zson" ] || [ "$1" = "bzson" ]; }; then
-  echo 'Must specify output type to be cheecked: "zson" or "bzson"'
+  echo 'Must specify output format to be checked: "zson" or "bzson"'
+  exit 1
+fi
+
+if [[ $(type -P "gzcat") ]]; then
+  ZCAT="gzcat"
+elif [[ $(type -P "zcat") ]]; then
+  ZCAT="zcat"
+else
+  echo "gzcat/zcat not found in PATH"
   exit 1
 fi
 
@@ -16,7 +25,11 @@ do
   COMPARE_TO="$(basename "$FILE")"
   ZPATH=${COMPARE_TO/.${ZNG_TYPE}.gz/}
   echo -n "${ZPATH}:" | tee -a "$TMPFILE"
-  gzcat zeek-default/"$ZPATH".log.gz | zq -f "$ZNG_TYPE" - | md5sum | awk '{ print $1 }' | tee -a "$TMPFILE"
+  "$ZCAT" zeek-default/"$ZPATH".log.gz \
+      | zq -f "$ZNG_TYPE" - \
+      | md5sum \
+      | awk '{ print $1 }' \
+      | tee -a "$TMPFILE"
 done
 
 echo

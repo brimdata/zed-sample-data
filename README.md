@@ -32,8 +32,22 @@ The data set was made from the several PCAP files in the [2018](https://archive.
 This produced the logs in Zeek default and NDJSON formats. As ZNG/BZNG are not yet output directly by Zeek, these logs were created by sending each Zeek default log through `zq`, e.g.:
 
 ```
-# for file in zeek-default/*; do gzcat $file | zq -f zson - | gzip > zson/$(basename $file | sed 's/\.log\.gz//').zson.gz ; done
-# for file in zeek-default/*; do gzcat $file | zq -f bzson - | gzip > bzson/$(basename $file | sed 's/\.log\.gz//').bzson.gz ; done
+# mkdir -p zson && \
+for file in zeek-default/*
+do
+  gzcat "$file" \
+      | zq -f zson - \
+      | gzip > zson/"$(basename "$file" | sed 's/\.log\.gz//')".zson.gz 
+done
+
+
+# mkdir -p bzson && \
+for file in zeek-default/*
+do
+  gzcat "$file" \
+      | zq -f bzson - \
+      | gzip > bzson/"$(basename "$file" | sed 's/\.log\.gz//')".bzson.gz 
+done
 ```
 
 # Testing
