@@ -1,7 +1,7 @@
 #!/bin/bash
-set -e
+set -eo pipefail
 
-if [ $# -ne 1 ] || ! { [ "$1" = "zson" ] || [ "$1" = "bzson" ]; }; then
+if (($# !=  1)) || ! [[ $1  =~ ^b?zson$ ]]; then
   echo 'Must specify output format to be checked: "zson" or "bzson"'
   exit 1
 fi
@@ -41,16 +41,12 @@ do
       | tee -a "$TMPFILE"
 done
 
-echo
-echo "diff'ing current \"zq -f $ZNG_TYPE\" output hashes vs. committed hashes:"
-RET=0
-diff "$TMPFILE" md5sums/"$ZNG_TYPE" || RET="$?"
-echo
-if [ "$RET" = 0 ]; then
-  echo "  ======> No diffs found. $ZNG_TYPE outputs have not changed."
-  rm -f "$TMPFILE"
-else
+echo -e "\ndiff'ing current \"zq -f $ZNG_TYPE\" output hashes vs. committed hashes:"
+if ! diff "$TMPFILE" md5sums/"$ZNG_TYPE"; then
   echo "  ======> diffs detected! Check for a zq bug or intentional $ZNG_TYPE format change."
   echo "          Current hashes are in $TMPFILE"
   exit 1
 fi
+
+echo -e "\n  ======> No diffs found. $ZNG_TYPE outputs have not changed."
+rm -f "$TMPFILE"
