@@ -68,5 +68,5 @@ diff'ing current "zq -f bzson" output hashes vs. committed hashes:
 > ftp:2d8d90df3c4b84eb9e281a3f10767aa5
 
   ======> diffs detected! Check for a zq bug or intentional bzson format change.
-          diff output is in /var/folders/yn/jbkxxkpd4vg142pc3_bd_krc0000gn/T/tmp.tnQDPRE1
+          Current hashes are in /var/folders/yn/jbkxxkpd4vg142pc3_bd_krc0000gn/T/tmp.9X7Gab9I
 ```

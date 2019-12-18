@@ -29,6 +29,6 @@ if [ "$RET" = 0 ]; then
   rm -f "$TMPFILE"
 else
   echo "  ======> diffs detected! Check for a zq bug or intentional $ZNG_TYPE format change."
-  echo "          diff output is in $TMPFILE"
+  echo "          Current hashes are in $TMPFILE"
   exit 1
 fi
