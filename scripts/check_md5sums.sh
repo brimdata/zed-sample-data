@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eo pipefail
 
-if (($# !=  1)) || ! [[ $1  =~ ^b?zson$ ]]; then
-  echo 'Must specify output format to be checked: "zson" or "bzson"'
+if (($# !=  1)) || ! [[ $1  =~ ^b?zng$ ]]; then
+  echo 'Must specify output format to be checked: "zng" or "bzng"'
   exit 1
 fi
 
