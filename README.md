@@ -35,18 +35,16 @@ This produced the logs in Zeek default and NDJSON formats. As ZNG/BZNG are not y
 # mkdir -p zng && \
 for file in zeek-default/*
 do
-  gzcat "$file" \
-      | zq -f zng - \
-      | gzip > zng/"$(basename "$file" | sed 's/\.log\.gz//')".zng.gz
+  zq -f zng "$file" \
+      | gzip -n > zng/"$(basename "$file" | sed 's/\.log\.gz//')".zng.gz
 done
 
 
 # mkdir -p bzng && \
 for file in zeek-default/*
 do
-  gzcat "$file" \
-      | zq -f bzng - \
-      | gzip > bzng/"$(basename "$file" | sed 's/\.log\.gz//')".bzng.gz
+  zq -f bzng "$file" \
+      | gzip -n > bzng/"$(basename "$file" | sed 's/\.log\.gz//')".bzng.gz
 done
 ```
 
