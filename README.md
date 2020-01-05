@@ -6,8 +6,8 @@ To help you get started quickly with [`zq`](https://github.com/mccanne/zq), this
 |-----------|--------|
 | [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/stable/examples/logs/) |
 | [zeek-ndjson/](zeek-ndjson) | [ Newline-delimited JSON (NDJSON)](http://ndjson.org/), as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
-| [zng/](zng) | [ZNG](https://github.com/mccanne/zq/blob/master/pkg/zng/docs/spec.md), the default output format of [`zq`](https://github.com/mccanne/zq) |
-| [bzng/](bzng) | [BZNG](https://github.com/mccanne/zq/blob/master/pkg/zng/docs/spec.md), the binary output format of [`zq`](https://github.com/mccanne/zq) |
+| [zng/](zng) | [ZNG](https://github.com/mccanne/zq/blob/master/pkg/zng/docs/README.md), the default output format of [`zq`](https://github.com/mccanne/zq) |
+| [bzng/](bzng) | [BZNG](https://github.com/mccanne/zq/blob/master/pkg/zng/docs/README.md), the binary output format of [`zq`](https://github.com/mccanne/zq) |
 
 The examples in the [`zq`](https://github.com/mccanne/zq) documentation are based on this sample data.
 
