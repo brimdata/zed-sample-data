@@ -11,6 +11,14 @@ To help you get started quickly with [`zq`](https://github.com/brimsec/zq), this
 
 The examples in the [`zq`](https://github.com/brimsec/zq) documentation are based on this sample data.
 
+# Downloading
+
+Because prior changes to the ZNG/BZNG output formats have added some bulk to the revision history, you'll typically want to save time by just downloading the latest revision:
+
+```
+# git clone --depth=1 https://github.com/brimsec/zq-sample-data.git
+```
+
 # Origin/License
 
 This sample data set was generated from a subset of the [packet capture archives](https://archive.wrccdc.org/pcaps/) that are distributed by the [WRCCDC](https://www.wrccdc.org/).
