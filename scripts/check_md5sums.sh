@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eo pipefail
 
-if (($# !=  1)) || ! [[ $1  =~ ^b?zng$ ]]; then
-  echo 'Must specify output format to be checked: "zng" or "bzng"'
+if (($# !=  1)) || ! [[ $1  =~ ^t?zng$ ]]; then
+  echo 'Must specify output format to be checked: "zng" or "tzng"'
   exit 1
 fi
 
