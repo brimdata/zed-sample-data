@@ -32,11 +32,12 @@ TMPFILE=$(mktemp)
 for FILE in "$REPO_DIR"/"$ZNG_TYPE"/*
 do
   COMPARE_TO="$(basename "$FILE")"
-  ZPATH=${COMPARE_TO/.${ZNG_TYPE}.gz/}
   if [ "$ZNG_TYPE" == "zng-uncompressed" ];then
     ZQ_CMD="zq -f zng -znglz4blocksize=0 -"
+    ZPATH=${COMPARE_TO/.zng.gz/}
   else
     ZQ_CMD="zq -f $ZNG_TYPE -"
+    ZPATH=${COMPARE_TO/.${ZNG_TYPE}.gz/}
   fi
   echo -n "${ZPATH}:" | tee -a "$TMPFILE"
   "$ZCAT" zeek-default/"$ZPATH".log.gz \

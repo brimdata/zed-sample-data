@@ -52,7 +52,7 @@ done
 for file in zeek-default/*
 do
   zq -f zng -znglz4blocksize 0 "$file" \
-      | gzip -n > zng-uncompressed/"$(basename "$file" | sed 's/\.log\.gz//')".zng-uncompressed.gz
+      | gzip -n > zng-uncompressed/"$(basename "$file" | sed 's/\.log\.gz//')".zng.gz
 done
 
 # mkdir -p tzng && \
