@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eo pipefail
 
-if (($# !=  1)) || ! [[ $1  =~ ^t?zng$ ]]; then
-  echo 'Must specify output format to be checked: "zng" or "tzng"'
+if (($# !=  1)) || ! [[ $1 == zng || $1 == zng-uncompressed || $1 == tzng ]]; then
+  echo 'Must specify output format to be checked: "zng", "zng-uncompressed", or "tzng"'
   exit 1
 fi
 
@@ -32,16 +32,22 @@ TMPFILE=$(mktemp)
 for FILE in "$REPO_DIR"/"$ZNG_TYPE"/*
 do
   COMPARE_TO="$(basename "$FILE")"
-  ZPATH=${COMPARE_TO/.${ZNG_TYPE}.gz/}
+  if [ "$ZNG_TYPE" == "zng-uncompressed" ];then
+    ZQ_CMD="zq -f zng -znglz4blocksize=0 -"
+    ZPATH=${COMPARE_TO/.zng.gz/}
+  else
+    ZQ_CMD="zq -f $ZNG_TYPE -"
+    ZPATH=${COMPARE_TO/.${ZNG_TYPE}.gz/}
+  fi
   echo -n "${ZPATH}:" | tee -a "$TMPFILE"
   "$ZCAT" zeek-default/"$ZPATH".log.gz \
-      | zq -f "$ZNG_TYPE" - \
+      | $ZQ_CMD \
       | $SUMTOOL \
       | awk '{ print $1 }' \
       | tee -a "$TMPFILE"
 done
 
-echo -e "\ndiff'ing current \"zq -f $ZNG_TYPE\" output hashes vs. committed hashes:"
+echo -e "\ndiff'ing current \"$ZNG_TYPE\" output hashes vs. committed hashes:"
 if ! diff "$TMPFILE" md5sums/"$ZNG_TYPE"; then
   echo "  ======> diffs detected! Check for a zq bug or intentional $ZNG_TYPE format change."
   echo "          Current hashes are in $TMPFILE"
