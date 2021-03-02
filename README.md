@@ -4,7 +4,7 @@ To help you get started quickly with [`zq`](https://github.com/brimsec/zq), this
 
 | Directory | Format |
 |-----------|--------|
-| [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/stable/examples/logs/) |
+| [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/master/log-formats.html#zeek-tsv-format-logs) |
 | [zeek-ndjson/](zeek-ndjson) | [ Newline-delimited JSON (NDJSON)](http://ndjson.org/), as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
 | [zng/](zng) | binary [ZNG](https://github.com/brimsec/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimsec/zq)'s default LZ4-compressed format |
 | [zng-uncompressed/](zng-uncompressed) | binary [ZNG](https://github.com/brimsec/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimsec/zq)'s option `-znglz4blocksize 0` to disable compression |
