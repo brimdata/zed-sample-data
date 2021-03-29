@@ -1,24 +1,24 @@
 # Sample Data
 
-To help you get started quickly with [`zq`](https://github.com/brimsec/zq), this repository contains small sample sets of [Zeek](https://www.zeek.org/) data. There are six different log formats available, all representing events based on the same network traffic:
+To help you get started quickly with [`zq`](https://github.com/brimdata/zq), this repository contains small sample sets of [Zeek](https://www.zeek.org/) data. There are six different log formats available, all representing events based on the same network traffic:
 
 | Directory | Format |
 |-----------|--------|
 | [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/master/log-formats.html#zeek-tsv-format-logs) |
 | [zeek-ndjson/](zeek-ndjson) | [ Newline-delimited JSON (NDJSON)](http://ndjson.org/), as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
-| [zng/](zng) | binary [ZNG](https://github.com/brimsec/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimsec/zq)'s default LZ4-compressed format |
-| [zng-uncompressed/](zng-uncompressed) | binary [ZNG](https://github.com/brimsec/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimsec/zq)'s option `-znglz4blocksize 0` to disable compression |
-| [zson/](zson) | [ZSON](https://github.com/brimsec/zq/blob/master/zng/docs/zson.md), a ZNG text output format of [`zq`](https://github.com/brimsec/zq) that has the look and feel of JSON |
-| [tzng/](tzng) | [TZNG](https://github.com/brimsec/zq/blob/master/zng/docs/README.md), an alternate ZNG text output format of [`zq`](https://github.com/brimsec/zq) |
+| [zng/](zng) | binary [ZNG](https://github.com/brimdata/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimdata/zq)'s default LZ4-compressed format |
+| [zng-uncompressed/](zng-uncompressed) | binary [ZNG](https://github.com/brimdata/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimdata/zq)'s option `-znglz4blocksize 0` to disable compression |
+| [zson/](zson) | [ZSON](https://github.com/brimdata/zq/blob/master/zng/docs/zson.md), a ZNG text output format of [`zq`](https://github.com/brimdata/zq) that has the look and feel of JSON |
+| [tzng/](tzng) | [TZNG](https://github.com/brimdata/zq/blob/master/zng/docs/README.md), an alternate ZNG text output format of [`zq`](https://github.com/brimdata/zq) |
 
-The examples in the [`zq`](https://github.com/brimsec/zq) documentation are based on this sample data.
+The examples in the [`zq`](https://github.com/brimdata/zq) documentation are based on this sample data.
 
 # Downloading
 
 Because prior changes to the ZNG/ZSON/TZNG output formats have added some bulk to the revision history, you'll typically want to save time by just downloading the latest revision:
 
 ```
-# git clone --depth=1 https://github.com/brimsec/zq-sample-data.git
+# git clone --depth=1 https://github.com/brimdata/zq-sample-data.git
 ```
 
 # Origin/License
