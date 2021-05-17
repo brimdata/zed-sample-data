@@ -18,7 +18,7 @@ The examples in the [`zq`](https://github.com/brimdata/zq) documentation are bas
 Because prior changes to the ZNG/ZSON/TZNG output formats have added some bulk to the revision history, you'll typically want to save time by just downloading the latest revision:
 
 ```
-# git clone --depth=1 https://github.com/brimdata/zq-sample-data.git
+# git clone --depth=1 https://github.com/brimdata/zed-sample-data.git
 ```
 
 # Origin/License
