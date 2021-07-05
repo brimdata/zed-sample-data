@@ -1,0 +1,17 @@
+type school = {
+  School:string,
+  District:string,
+  City:string,
+  County:string,
+  Zip:string,
+  Latitude:float64,
+  Longitude:float64,
+  Magnet:bool,
+  OpenDate:time,
+  ClosedDate:time,
+  Phone:string,
+  StatusType:string,
+  Website:string
+};
+
+put this := shape(school) | put this := crop(school)

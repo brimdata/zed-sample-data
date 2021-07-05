@@ -1,0 +1,11 @@
+type satscore = {
+  AvgScrMath: uint16,
+  AvgScrRead: uint16,
+  AvgScrWrite: uint16,
+  cname: string,
+  dname: string,
+  sname: string,
+  cds: string
+};
+
+put this := shape(satscore) | put this := crop(satscore)
