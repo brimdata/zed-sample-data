@@ -4,8 +4,7 @@ type satscore = {
   AvgScrWrite: uint16,
   cname: string,
   dname: string,
-  sname: string,
-  cds: string
+  sname: string
 };
 
 put this := shape(satscore) | put this := crop(satscore)
