@@ -1,4 +1,4 @@
-type satscore = {
+type testscore = {
   AvgScrMath: uint16,
   AvgScrRead: uint16,
   AvgScrWrite: uint16,
@@ -7,4 +7,4 @@ type satscore = {
   sname: string
 };
 
-put this := shape(satscore) | put this := crop(satscore)
+put this := shape(testscore) | put this := crop(testscore)

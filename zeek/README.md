@@ -1,8 +1,8 @@
 # Zeek Sample Data
 
 For testing and comparing the differences between the multiple supported Zed
-input data formats, the below this directory are several small sample
-sets of [Zeek](https://www.zeek.org/) data. There are six different log formats
+input/output data formats, below this directory are several small sample sets of
+[Zeek](https://www.zeek.org/) data. There are six different log formats
 available, all representing events based on the same network traffic:
 
 | Directory | Format |
