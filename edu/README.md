@@ -44,7 +44,7 @@ unneeded fields. The shaped and sorted data was then stored as ZSON.
 
 ```
 zq -z -i json -I shape-schools.zed '| sort School' json/schools.json > zson/schools.zson
-zq -z -i json -I shape-testcores.zed '| sort sname' json/testscores.json > zson/testscores.zson
+zq -z -i json -I shape-testscores.zed '| sort sname' json/testscores.json > zson/testscores.zson
 ```
 
 Finally, as some Zed language examples required IP address network data, the
@@ -57,7 +57,7 @@ for hostname in $(zq -f text 'by Website' zson/schools.zson | sed 's/^http:\/\//
 do
   addr=$(dig +noall +answer $hostname | grep "\tA\t" | awk '{ print $5 }' | head -1)
   if [ -n "$addr" ]; then
-    echo "{\"Website\":\"$hostname\",addr:$addr}"
+    echo "{Website:\"$hostname\",addr:$addr}" >> zson/webaddrs.zson
   fi
 done
 ```
