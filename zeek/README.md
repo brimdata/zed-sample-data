@@ -1,6 +1,9 @@
-# Sample Data
+# Zeek Sample Data
 
-To help you get started quickly with [`zq`](https://github.com/brimdata/zq), this repository contains small sample sets of [Zeek](https://www.zeek.org/) data. There are six different log formats available, all representing events based on the same network traffic:
+For testing and comparing the differences between the multiple supported Zed
+input data formats, the below this directory are several small sample
+sets of [Zeek](https://www.zeek.org/) data. There are six different log formats
+available, all representing events based on the same network traffic:
 
 | Directory | Format |
 |-----------|--------|
@@ -11,35 +14,42 @@ To help you get started quickly with [`zq`](https://github.com/brimdata/zq), thi
 | [zson/](zson) | [ZSON](https://github.com/brimdata/zq/blob/master/zng/docs/zson.md), a ZNG text output format of [`zq`](https://github.com/brimdata/zq) that has the look and feel of JSON |
 | [tzng/](tzng) | [TZNG](https://github.com/brimdata/zq/blob/master/zng/docs/README.md), an alternate ZNG text output format of [`zq`](https://github.com/brimdata/zq) |
 
-The examples in the [`zq`](https://github.com/brimdata/zq) documentation are based on this sample data.
-
-# Downloading
-
-Because prior changes to the ZNG/ZSON/TZNG output formats have added some bulk to the revision history, you'll typically want to save time by just downloading the latest revision:
-
-```
-# git clone --depth=1 https://github.com/brimdata/zed-sample-data.git
-```
+A Zed [output check](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh)
+test runs each time new code is committed to the project to ensure that no
+unintended changes are introduced to the output format.
 
 # Origin/License
 
-This sample data set was generated from a subset of the packet capture archives (formerly at https://archive.wrccdc.org/pcaps, though the site has been down of late) that are distributed by the [WRCCDC](https://www.wrccdc.org/).
+This sample data set was generated from a subset of the packet capture archives
+at https://archive.wrccdc.org/pcaps that are distributed by the
+[WRCCDC](https://www.wrccdc.org/).
 
-This sample data is [licensed](LICENSE) under a Creative Commons Attribution-ShareAlike 4.0 International License, as it is built upon the WRCCDC PCAP data that is distributed under the same license.
+This sample data is [licensed](../LICENSE) under a Creative Commons
+Attribution-ShareAlike 4.0 International License, as it is built upon the
+WRCCDC PCAP data that is distributed under the same license.
 
 # Acknowledgement
 
-We would like to express our thanks to the WRCCDC for generously making their packet capture archives available to the public and for commercial use. The terabytes of "real world" data has been invaluable to us in testing the foundations of `zq` at scale.
+We would like to express our thanks to the WRCCDC for generously making their
+packet capture archives available to the public and for commercial use. The
+terabytes of "real world" data has been invaluable to us in testing the
+foundations of Zed at scale.
 
 # Creation
 
-The data set was made from the several PCAP files in the 2018 set. [Zeek v3.0.0](https://github.com/zeek/zeek/releases/tag/v3.0.0) was used in its default configuration with the only change being the addition/enabling of the [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) package. The packet captures were then processed via the command-line:
+The data set was made from the several PCAP files in the 2018 set.
+[Zeek v3.0.0](https://github.com/zeek/zeek/releases/tag/v3.0.0) was used in its
+default configuration with the only change being the addition/enabling of the
+[JSON Streaming Logs](https://github.com/corelight/json-streaming-logs)
+package. The packet captures were then processed via the command-line:
 
 ```
 # zeek -r wrccdc.2018-03-24.101533000000000.pcap -r wrccdc.2018-03-24.101551000000000.pcap -r wrccdc.2018-03-24.101610000000000.pcap -r wrccdc.2018-03-24.101629000000000.pcap -r wrccdc.2018-03-24.101737000000000.pcap -r wrccdc.2018-03-24.101939000000000.pcap -r wrccdc.2018-03-24.102051000000000.pcap -r wrccdc.2018-03-24.102126000000000.pcap -r wrccdc.2018-03-24.102233000000000.pcap -r wrccdc.2018-03-24.102443000000000.pcap -r wrccdc.2018-03-24.102602000000000.pcap -r wrccdc.2018-03-24.102643000000000.pcap -r wrccdc.2018-03-24.102717000000000.pcap -r wrccdc.2018-03-24.102733000000000.pcap -r wrccdc.2018-03-24.102747000000000.pcap -r wrccdc.2018-03-24.102831000000000.pcap -r wrccdc.2018-03-24.102920000000000.pcap -r wrccdc.2018-03-24.103009000000000.pcap -r wrccdc.2018-03-24.103049000000000.pcap -r wrccdc.2018-03-24.103117000000000.pcap -r wrccdc.2018-03-24.103152000000000.pcap -r wrccdc.2018-03-24.103210000000000.pcap -r wrccdc.2018-03-24.103224000000000.pcap -r wrccdc.2018-03-24.103256000000000.pcap -r wrccdc.2018-03-24.103420000000000.pcap -r wrccdc.2018-03-24.103630000000000.pcap local
 ```
 
-This produced the logs in Zeek default and NDJSON formats. As ZNG/ZSON/TZNG are not yet output directly by Zeek, these logs were created by sending each Zeek default log through `zq`, e.g.:
+This produced the logs in Zeek default (TSV) and NDJSON formats.
+As ZNG/ZSON/TZNG are not currently output directly by Zeek, these logs were
+created by sending each Zeek TSV log through `zq`, e.g.:
 
 ```
 # mkdir -p zng && \
@@ -74,7 +84,10 @@ done
 
 # Testing
 
-Since the sample ZNG/ZSON/TZNG logs are generated by `zq`, regenerating these outputs is a useful `zq` test. Assuming `zq` is in your `$PATH`, a script is provided to regenerate the hash for each ZNG/ZSON/TZNG log and compare it to a last known "good" hash stored in the `md5sums/` directory.
+Since the sample ZNG/ZSON/TZNG logs are generated by `zq`, regenerating these
+outputs is a useful `zq` test. Assuming `zq` is in your `$PATH`, a script is
+provided to regenerate the hash for each ZNG/ZSON/TZNG log and compare it to a
+last known "good" hash stored in the `md5sums/` directory.
 
 #### Example successful output:
 
