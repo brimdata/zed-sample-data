@@ -12,6 +12,9 @@ scores. This data is used in most of the examples in the
 open source network security monitoring tool. This data is used in Zed test
 automation to ensure the consistency of supported input/output data formats.
 
+Follow the directory links above for more information on the origin and use
+of each sample data set.
+
 # Downloading
 
 Because prior changes to the Zed output formats have added some bulk to the
