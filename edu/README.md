@@ -38,7 +38,7 @@ sqlite3 -json sqlite/cdeschools.sqlite "select * from schools;" > json/schools.j
 sqlite3 -json sqlite/cdeschools.sqlite "select * from satscores;" > json/testscores.json
 ```
 
-As the CSV/JSON formats lack rich data typing information, Zed shaper scripts
+As the JSON format lacks rich data typing information, Zed shaper scripts
 located in this directory were then used to apply ideal data types and trim
 unneeded fields. The shaped and sorted data was then stored as ZSON.
 

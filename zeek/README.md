@@ -16,7 +16,7 @@ available, all representing events based on the same network traffic:
 
 A Zed [output check](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh)
 test runs each time new code is committed to the project to ensure that no
-unintended changes are introduced to the output format.
+unintended changes are introduced to the output formats.
 
 # Origin/License
 
