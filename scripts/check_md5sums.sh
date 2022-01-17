@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eo pipefail
 
-if (($# !=  1)) || ! [[ $1 == zng || $1 == zng-uncompressed || $1 == zson || $1 == tzng ]]; then
-  echo 'Must specify output format to be checked: "zng", "zng-uncompressed", "zson", or "tzng"'
+if (($# !=  1)) || ! [[ $1 == zng || $1 == zng-uncompressed || $1 == zson ]]; then
+  echo 'Must specify output format to be checked: "zng", "zng-uncompressed", or "zson"'
   exit 1
 fi
 
