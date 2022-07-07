@@ -33,7 +33,7 @@ for FILE in "$REPO_DIR"/"$ZNG_TYPE"/*
 do
   COMPARE_TO="$(basename "$FILE")"
   if [ "$ZNG_TYPE" == "zng-uncompressed" ];then
-    ZQ_CMD="zq -f zng -znglz4blocksize=0 -"
+    ZQ_CMD="zq -f zng -zngcompress=false -"
     ZPATH=${COMPARE_TO/.zng.gz/}
   else
     ZQ_CMD="zq -f $ZNG_TYPE -"
