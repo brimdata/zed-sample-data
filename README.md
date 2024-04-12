@@ -8,7 +8,7 @@ To help you get started quickly with [`zq`](https://zed.brimdata.io/docs/command
 | [zeek-ndjson/](zeek-ndjson) | [ Newline-delimited JSON (NDJSON)](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON), as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
 | [zng/](zng) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s default LZ4-compressed format |
 | [zng-uncompressed/](zng-uncompressed) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s option `-zng.compress=false` to disable compression |
-| [zson/](zson) | [ZSON](https://zed.brimdata.io/docs/formats/zson), a ZNG text output format of [`zq`](https://zed.brimdata.io/docs/commands/zq) that has the look and feel of JSON |
+| [zson/](zson) | [ZSON](https://zed.brimdata.io/docs/formats/zson), a Zed text output format that has the look and feel of JSON |
 
 This sample data is used frequently for a [simple Zed performance test](https://github.com/brimdata/zed/blob/main/performance/README.md) and to [check for unexpected changes in the Zed output formats](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh).
 
@@ -32,7 +32,7 @@ We would like to express our thanks to the WRCCDC for generously making their pa
 
 # Creation
 
-The data set was made from the several PCAP files in the 2018 set. [Zeek v3.0.0](https://github.com/zeek/zeek/releases/tag/v3.0.0) was used in its default configuration with the only change being the addition/enabling of the [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) package. The packet captures were then processed via the command-line:
+The data set was made from the several PCAP files in the 2018 set. [Zeek v6.2.0](https://github.com/zeek/zeek/releases/tag/v6.2.0) was used in its default configuration with the only change being the addition/enabling of the [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) package. The packet captures were then processed via the command-lines:
 
 ```
 # mergecap -w wrccdc.pcap wrccdc.2018-03-24.10*.pcap
