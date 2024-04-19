@@ -1,16 +1,16 @@
 # Sample Data
 
-To help you get started quickly with [`zq`](https://github.com/brimdata/zq), this repository contains small sample sets of [Zeek](https://www.zeek.org/) data. There are six different log formats available, all representing events based on the same network traffic:
+To help you get started quickly with [`zq`](https://zed.brimdata.io/docs/commands/zq), this repository contains small sample sets of [Zeek](https://www.zeek.org/) data. There are six different log formats available, all representing events based on the same network traffic:
 
 | Directory | Format |
 |-----------|--------|
 | [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/master/log-formats.html#zeek-tsv-format-logs) |
-| [zeek-ndjson/](zeek-ndjson) | [ Newline-delimited JSON (NDJSON)](http://ndjson.org/), as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
-| [zng/](zng) | binary [ZNG](https://github.com/brimdata/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimdata/zq)'s default LZ4-compressed format |
-| [zng-uncompressed/](zng-uncompressed) | binary [ZNG](https://github.com/brimdata/zq/blob/master/zng/docs/README.md), output with [`zq`](https://github.com/brimdata/zq)'s option `-znglz4blocksize 0` to disable compression |
-| [zson/](zson) | [ZSON](https://github.com/brimdata/zq/blob/master/zng/docs/zson.md), a ZNG text output format of [`zq`](https://github.com/brimdata/zq) that has the look and feel of JSON |
+| [zeek-ndjson/](zeek-ndjson) | [ Newline-delimited JSON (NDJSON)](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON), as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
+| [zng/](zng) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s default LZ4-compressed format |
+| [zng-uncompressed/](zng-uncompressed) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s option `-zng.compress=false` to disable compression |
+| [zson/](zson) | [ZSON](https://zed.brimdata.io/docs/formats/zson), a Zed text output format that has the look and feel of JSON |
 
-The examples in the [`zq`](https://github.com/brimdata/zq) documentation are based on this sample data.
+This sample data is used frequently for a [simple Zed performance test](https://github.com/brimdata/zed/blob/main/performance/README.md) and to [check for unexpected changes in the Zed output formats](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh).
 
 # Downloading
 
@@ -32,10 +32,11 @@ We would like to express our thanks to the WRCCDC for generously making their pa
 
 # Creation
 
-The data set was made from the several PCAP files in the 2018 set. [Zeek v3.0.0](https://github.com/zeek/zeek/releases/tag/v3.0.0) was used in its default configuration with the only change being the addition/enabling of the [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) package. The packet captures were then processed via the command-line:
+The data set was made from the several PCAP files in the 2018 set. [Zeek v6.2.0](https://github.com/zeek/zeek/releases/tag/v6.2.0) was used in its default configuration with the only change being the addition/enabling of the [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) package. The packet captures were then processed via the command-lines:
 
 ```
-# zeek -r wrccdc.2018-03-24.101533000000000.pcap -r wrccdc.2018-03-24.101551000000000.pcap -r wrccdc.2018-03-24.101610000000000.pcap -r wrccdc.2018-03-24.101629000000000.pcap -r wrccdc.2018-03-24.101737000000000.pcap -r wrccdc.2018-03-24.101939000000000.pcap -r wrccdc.2018-03-24.102051000000000.pcap -r wrccdc.2018-03-24.102126000000000.pcap -r wrccdc.2018-03-24.102233000000000.pcap -r wrccdc.2018-03-24.102443000000000.pcap -r wrccdc.2018-03-24.102602000000000.pcap -r wrccdc.2018-03-24.102643000000000.pcap -r wrccdc.2018-03-24.102717000000000.pcap -r wrccdc.2018-03-24.102733000000000.pcap -r wrccdc.2018-03-24.102747000000000.pcap -r wrccdc.2018-03-24.102831000000000.pcap -r wrccdc.2018-03-24.102920000000000.pcap -r wrccdc.2018-03-24.103009000000000.pcap -r wrccdc.2018-03-24.103049000000000.pcap -r wrccdc.2018-03-24.103117000000000.pcap -r wrccdc.2018-03-24.103152000000000.pcap -r wrccdc.2018-03-24.103210000000000.pcap -r wrccdc.2018-03-24.103224000000000.pcap -r wrccdc.2018-03-24.103256000000000.pcap -r wrccdc.2018-03-24.103420000000000.pcap -r wrccdc.2018-03-24.103630000000000.pcap local
+# mergecap -w wrccdc.pcap wrccdc.2018-03-24.10*.pcap
+# zeek -r wrccdc.pcap local "JSONStreaming::enable_log_rotation=F"
 ```
 
 This produced the logs in Zeek default and NDJSON formats. As ZNG and ZSON are not yet output directly by Zeek, these logs were created by sending each Zeek default log through `zq`, e.g.:
@@ -51,7 +52,7 @@ done
 # mkdir -p zng-uncompressed && \
 for file in zeek-default/*
 do
-  zq -f zng -znglz4blocksize 0 "$file" \
+  zq -f zng -zng.compress=false "$file" \
       | gzip -n > zng-uncompressed/"$(basename "$file" | sed 's/\.log\.gz//')".zng.gz
 done
 
