@@ -33,10 +33,10 @@ for FILE in "$REPO_DIR"/"$ZNG_TYPE"/*
 do
   COMPARE_TO="$(basename "$FILE")"
   if [ "$ZNG_TYPE" == "zng-uncompressed" ];then
-    ZQ_CMD="zq -f zng -zng.compress=false -"
+    ZQ_CMD="super query -f zng -zng.compress=false -"
     ZPATH=${COMPARE_TO/.zng.gz/}
   else
-    ZQ_CMD="zq -f $ZNG_TYPE -"
+    ZQ_CMD="super query -f $ZNG_TYPE -"
     ZPATH=${COMPARE_TO/.${ZNG_TYPE}.gz/}
   fi
   echo -n "${ZPATH}:" | tee -a "$TMPFILE"
