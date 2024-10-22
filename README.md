@@ -5,7 +5,7 @@ To help you get started quickly with [`zq`](https://zed.brimdata.io/docs/command
 | Directory | Format |
 |-----------|--------|
 | [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/master/log-formats.html#zeek-tsv-format-logs) |
-| [zeek-ndjson/](zeek-ndjson) | [ Newline-delimited JSON (NDJSON)](https://en.wikipedia.org/wiki/JSON_streaming#NDJSON), as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
+| [zeek-json/](zeek-json) | [ JSON as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
 | [zng/](zng) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s default LZ4-compressed format |
 | [zng-uncompressed/](zng-uncompressed) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s option `-zng.compress=false` to disable compression |
 | [zson/](zson) | [ZSON](https://zed.brimdata.io/docs/formats/zson), a Zed text output format that has the look and feel of JSON |
@@ -39,7 +39,7 @@ The data set was made from the several PCAP files in the 2018 set. [Zeek v6.2.0]
 # zeek -r wrccdc.pcap local "JSONStreaming::enable_log_rotation=F"
 ```
 
-This produced the logs in Zeek default and NDJSON formats. As ZNG and ZSON are not yet output directly by Zeek, these logs were created by sending each Zeek default log through `zq`, e.g.:
+This produced the logs in Zeek default and JSON formats. As ZNG and ZSON are not yet output directly by Zeek, these logs were created by sending each Zeek default log through `zq`, e.g.:
 
 ```
 # mkdir -p zng && \
