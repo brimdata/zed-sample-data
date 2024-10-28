@@ -1,20 +1,20 @@
 # Sample Data
 
-To help you get started quickly with [`zq`](https://zed.brimdata.io/docs/commands/zq), this repository contains small sample sets of [Zeek](https://www.zeek.org/) data. There are six different log formats available, all representing events based on the same network traffic:
+To help you get started quickly with [`super`](https://zed.brimdata.io/docs/commands/zq), this repository contains small sample sets of [Zeek](https://www.zeek.org/) data. There are six different log formats available, all representing events based on the same network traffic:
 
 | Directory | Format |
 |-----------|--------|
 | [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/master/log-formats.html#zeek-tsv-format-logs) |
 | [zeek-json/](zeek-json) | [ JSON as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
-| [zng/](zng) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s default LZ4-compressed format |
-| [zng-uncompressed/](zng-uncompressed) | Binary [ZNG](https://zed.brimdata.io/docs/formats/zng), output with [`zq`](https://zed.brimdata.io/docs/commands/zq)'s option `-zng.compress=false` to disable compression |
-| [zson/](zson) | [ZSON](https://zed.brimdata.io/docs/formats/zson), a Zed text output format that has the look and feel of JSON |
+| [bsup/](bsup) | [Super Binary](https://zed.brimdata.io/docs/formats/zng), output with [`super`](https://zed.brimdata.io/docs/commands/zq)'s default LZ4-compressed format |
+| [bsup-uncompressed/](zng-uncompressed) | [Super Binary](https://zed.brimdata.io/docs/formats/zng), output with [`super`](https://zed.brimdata.io/docs/commands/zq)'s option `-bsup.compress=false` to disable compression |
+| [jsup/](zson) | [Super JSON](https://zed.brimdata.io/docs/formats/zson), a  text output format that has the look and feel of JSON |
 
-This sample data is used frequently for a [simple Zed performance test](https://github.com/brimdata/zed/blob/main/performance/README.md) and to [check for unexpected changes in the Zed output formats](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh).
+This sample data is used frequently for a [simple SuperDB performance test](https://github.com/brimdata/zed/blob/main/performance/README.md) and to [check for unexpected changes in the SuperDB output formats](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh).
 
 # Downloading
 
-Because prior changes to the ZNG and ZSON output formats have added some bulk to the revision history, you'll typically want to save time by just downloading the latest revision:
+Because prior changes to the Super Binary and Super JSON output formats have added some bulk to the revision history, you'll typically want to save time by just downloading the latest revision:
 
 ```
 # git clone --depth=1 https://github.com/brimdata/zed-sample-data.git
@@ -28,7 +28,7 @@ This sample data is [licensed](LICENSE) under a Creative Commons Attribution-Sha
 
 # Acknowledgement
 
-We would like to express our thanks to the WRCCDC for generously making their packet capture archives available to the public and for commercial use. The terabytes of "real world" data has been invaluable to us in testing the foundations of `zq` at scale.
+We would like to express our thanks to the WRCCDC for generously making their packet capture archives available to the public and for commercial use. The terabytes of "real world" data has been invaluable to us in testing the foundations of `super` at scale.
 
 # Creation
 
@@ -39,49 +39,48 @@ The data set was made from the several PCAP files in the 2018 set. [Zeek v6.2.0]
 # zeek -r wrccdc.pcap local "JSONStreaming::enable_log_rotation=F"
 ```
 
-This produced the logs in Zeek default and JSON formats. As ZNG and ZSON are not yet output directly by Zeek, these logs were created by sending each Zeek default log through `zq`, e.g.:
-
+This produced the logs in Zeek default and JSON formats. As Super Binary and Super JSON are not output by Zeek, these logs were created by sending each Zeek default log through `super`, e.g.:
 ```
-# mkdir -p zng && \
+# mkdir -p bsup && \
 for file in zeek-default/*
 do
-  zq -f zng "$file" \
-      | gzip -n > zng/"$(basename "$file" | sed 's/\.log\.gz//')".zng.gz
+  super -f bsup "$file" \
+      | gzip -n > bsup/"$(basename "$file" | sed 's/\.log\.gz//')".bsup.gz
 done
 
-# mkdir -p zng-uncompressed && \
+# mkdir -p bsup-uncompressed && \
 for file in zeek-default/*
 do
-  zq -f zng -zng.compress=false "$file" \
-      | gzip -n > zng-uncompressed/"$(basename "$file" | sed 's/\.log\.gz//')".zng.gz
+  super -f bsup -bsup.compress=false "$file" \
+      | gzip -n > bsup-uncompressed/"$(basename "$file" | sed 's/\.log\.gz//')".bsup.gz
 done
 
-# mkdir -p zson && \
+# mkdir -p jsup && \
 for file in zeek-default/*
 do
-  zq -f zson "$file" \
-      | gzip -n > zson/"$(basename "$file" | sed 's/\.log\.gz//')".zson.gz
+  super -f jsup "$file" \
+      | gzip -n > jsup/"$(basename "$file" | sed 's/\.log\.gz//')".jsup.gz
 done
 ```
 
 # Testing
 
-Since the sample ZNG and ZSON logs are generated by `zq`, regenerating these outputs is a useful `zq` test. Assuming `zq` is in your `$PATH`, a script is provided to regenerate the hash for each ZNG and ZSON log and compare it to a last known "good" hash stored in the `md5sums/` directory.
+Since the sample Super Binary and Super JSON logs are generated by `super`, regenerating these outputs is a useful `super` test. Assuming `super` is in your `$PATH`, a script is provided to regenerate the hash for each Super Binary and Super JSON log and compare it to a last known "good" hash stored in the `md5sums/` directory.
 
 #### Example output highlighting a format change has been flagged:
 
 ```
-# scripts/check_md5sums.sh zng
+# scripts/check_md5sums.sh bsup
 capture_loss:62949d22a0a557342d28ee5ee4b64d50
 ...
 x509:10333d3d004c718b04cbedb8ee195cca
 
-diff'ing current "zq -f zng" output hashes vs. committed hashes:
+diff'ing current "super -f bsup" output hashes vs. committed hashes:
 7c7
 < ftp:c84824c8114df4db745399ff875b0d92
 ---
 > ftp:2d8d90df3c4b84eb9e281a3f10767aa5
 
-  ======> diffs detected! Check for a zq bug or intentional zng format change.
+  ======> diffs detected! Check for a super bug or intentional Super Binary format change.
           Current hashes are in /var/folders/yn/jbkxxkpd4vg142pc3_bd_krc0000gn/T/tmp.9X7Gab9I
 ```
