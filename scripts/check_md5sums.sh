@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eo pipefail
 
-if (($# !=  1)) || ! [[ $1 == zng || $1 == bsup-uncompressed || $1 == jsup ]]; then
+if (($# !=  1)) || ! [[ $1 == bsup || $1 == bsup-uncompressed || $1 == jsup ]]; then
   echo 'Must specify output format to be checked: "bsup", "bsup-uncompressed", or "jsup"'
   exit 1
 fi
@@ -34,7 +34,7 @@ do
   COMPARE_TO="$(basename "$FILE")"
   if [ "$SUPER_TYPE" == "bsup-uncompressed" ];then
     ZQ_CMD="super -f bsup -bsup.compress=false -"
-    ZPATH=${COMPARE_TO/.zng.gz/}
+    ZPATH=${COMPARE_TO/.bsup.gz/}
   else
     ZQ_CMD="super -f $SUPER_TYPE -"
     ZPATH=${COMPARE_TO/.${SUPER_TYPE}.gz/}

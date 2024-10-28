@@ -7,8 +7,8 @@ To help you get started quickly with [`super`](https://zed.brimdata.io/docs/comm
 | [zeek-default/](zeek-default) | [Zeek default output format](https://docs.zeek.org/en/master/log-formats.html#zeek-tsv-format-logs) |
 | [zeek-json/](zeek-json) | [ JSON as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
 | [bsup/](bsup) | [Super Binary](https://zed.brimdata.io/docs/formats/zng), output with [`super`](https://zed.brimdata.io/docs/commands/zq)'s default LZ4-compressed format |
-| [bsup-uncompressed/](zng-uncompressed) | [Super Binary](https://zed.brimdata.io/docs/formats/zng), output with [`super`](https://zed.brimdata.io/docs/commands/zq)'s option `-bsup.compress=false` to disable compression |
-| [jsup/](zson) | [Super JSON](https://zed.brimdata.io/docs/formats/zson), a  text output format that has the look and feel of JSON |
+| [bsup-uncompressed/](bsup-uncompressed) | [Super Binary](https://zed.brimdata.io/docs/formats/zng), output with [`super`](https://zed.brimdata.io/docs/commands/zq)'s option `-bsup.compress=false` to disable compression |
+| [jsup/](jsup) | [Super JSON](https://zed.brimdata.io/docs/formats/zson), a  text output format that has the look and feel of JSON |
 
 This sample data is used frequently for a [simple SuperDB performance test](https://github.com/brimdata/zed/blob/main/performance/README.md) and to [check for unexpected changes in the SuperDB output formats](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh).
 
