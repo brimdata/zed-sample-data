@@ -8,7 +8,7 @@ To help you get started quickly with [`super`](https://zed.brimdata.io/docs/comm
 | [zeek-json/](zeek-json) | [ JSON as output by the Zeek package for [JSON Streaming Logs](https://github.com/corelight/json-streaming-logs) |
 | [bsup/](bsup) | [Super Binary](https://zed.brimdata.io/docs/formats/zng), output with [`super`](https://zed.brimdata.io/docs/commands/zq)'s default LZ4-compressed format |
 | [bsup-uncompressed/](bsup-uncompressed) | [Super Binary](https://zed.brimdata.io/docs/formats/zng), output with [`super`](https://zed.brimdata.io/docs/commands/zq)'s option `-bsup.compress=false` to disable compression |
-| [jsup/](jsup) | [Super JSON](https://zed.brimdata.io/docs/formats/zson), a  text output format that has the look and feel of JSON |
+| [sup/](sup) | [Super JSON](https://zed.brimdata.io/docs/formats/zson), a  text output format that has the look and feel of JSON |
 
 This sample data is used frequently for a [simple SuperDB performance test](https://github.com/brimdata/zed/blob/main/performance/README.md) and to [check for unexpected changes in the SuperDB output formats](https://github.com/brimdata/zed/blob/main/scripts/output-check.sh).
 
@@ -55,11 +55,11 @@ do
       | gzip -n > bsup-uncompressed/"$(basename "$file" | sed 's/\.log\.gz//')".bsup.gz
 done
 
-# mkdir -p jsup && \
+# mkdir -p sup && \
 for file in zeek-default/*
 do
-  super -f jsup "$file" \
-      | gzip -n > jsup/"$(basename "$file" | sed 's/\.log\.gz//')".jsup.gz
+  super -f sup "$file" \
+      | gzip -n > sup/"$(basename "$file" | sed 's/\.log\.gz//')".sup.gz
 done
 ```
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eo pipefail
 
-if (($# !=  1)) || ! [[ $1 == bsup || $1 == bsup-uncompressed || $1 == jsup ]]; then
-  echo 'Must specify output format to be checked: "bsup", "bsup-uncompressed", or "jsup"'
+if (($# !=  1)) || ! [[ $1 == bsup || $1 == bsup-uncompressed || $1 == sup ]]; then
+  echo 'Must specify output format to be checked: "bsup", "bsup-uncompressed", or "sup"'
   exit 1
 fi
 
